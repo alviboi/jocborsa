@@ -29,7 +29,7 @@
 
       <b-modal id="modal-1" title="Operació de compra/venta">
         <div>
-          <b-form @submit="onSubmit" @reset="onReset">
+          <b-form @submit="onSubmit">
             <b-form-group
               id="input-group-1"
               label="Producte:"
