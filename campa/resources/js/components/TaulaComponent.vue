@@ -89,7 +89,7 @@ export default {
         { producte: "Groc", quantitat: 0, valor: 0 },
         { producte: "Verd", quantitat: 0, valor: 0 },
         { producte: "Blau", quantitat: 0, valor: 0 },
-        { producte: "Índigo", quantitat: 0, valor: 0 },
+        { producte: "Indigo", quantitat: 0, valor: 0 },
         { producte: "Violeta", quantitat: 0, valor: 0 },
       ],
       colors: [
@@ -163,8 +163,13 @@ export default {
     agafa_productes(url,index){
       axios.get(url)
       .then(res => {
-        console.log(res)
-        this.items[index].quantitat = res.data[0]['quantitat'];      
+        console.log(res);
+        if (typeof res.data[0] === 'undefined') {
+          this.items[index].quantitat = 0;
+        } else {
+          this.items[index].quantitat = res.data[0]['quantitat'];
+        }
+              
       })
       .catch(err => {
         console.error(err); 
