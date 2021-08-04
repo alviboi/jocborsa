@@ -20,7 +20,8 @@
       <b-table striped hover :items="items">
       </b-table>
       <div>
-        TOTAL DINERS: {{ diners }}
+        TOTAL DINERS: {{ diners }} <br>
+        TOTAL: {{ total_retotal }}
       </div>
     </div>
     <div>
@@ -107,7 +108,8 @@ export default {
         operacio: null,
       },
       show: true,
-      diners: 0
+      diners: 0,
+      total_valors: 0
     };
   },
   mounted() {
@@ -135,6 +137,8 @@ export default {
           console.error(err);
           this.$toast.error(err.response.data.message);
         });
+        this.calcula_total();    
+
     },
     agafa_valors () {
       let url = 'Valors';
@@ -174,15 +178,33 @@ export default {
       .catch(err => {
         console.error(err); 
       })
+    },
+    calcula_total(){
+      this.total_valors = 0;
+      for (let index = 0; index < this.items.length; index++) {
+        this.total_valors += this.items[index].quantitat*this.items[index].valor;
+      }
+      this.total_valors += this.diners;
     }
   },
-  mounted() {
+  beforeMount() {
     this.agafa_valors();
     this.agafa_diners();
     this.colors.forEach(element => {
       this.agafa_productes(element.color,element.index);
-    });    
+    });
+    
     
   },
+  computed: {
+    total_retotal() {
+      let total_valors = 0;
+      for (let index = 0; index < this.items.length; index++) {
+        total_valors += this.items[index].quantitat*this.items[index].valor;
+      }
+      total_valors += this.diners;
+      return total_valors;
+    }
+  }
 };
 </script>
