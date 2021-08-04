@@ -12,6 +12,7 @@ use App\Http\Controllers\BlauController;
 use App\Http\Controllers\IndigoController;
 use App\Http\Controllers\VioletaController;
 use App\Http\Controllers\DinersController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -34,6 +35,7 @@ Route::resource('Blau', BlauController::class)->middleware('auth');;
 Route::resource('Indigo', IndigoController::class)->middleware('auth');;
 Route::resource('Violeta', VioletaController::class)->middleware('auth');;
 Route::resource('Diners', DinersController::class)->middleware('auth');;
+Route::resource('User', UserController::class);
 Route::get('aaa', [ValorsController::class, 'este']);
 
 
